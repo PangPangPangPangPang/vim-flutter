@@ -97,7 +97,7 @@ function! flutter#_on_output_nvim(job_id, data, event) abort dict
 endfunction
 endif
 
-function! flutter#run(...) abort
+function! flutter#cmd(cmd, ...) abort
   if exists('g:flutter_job')
     echoerr 'Another Flutter process is running.'
     return 0
@@ -111,7 +111,7 @@ function! flutter#run(...) abort
     setlocal noswapfile
   endif
 
-  let cmd = g:flutter_command.' run'
+  let cmd = g:flutter_command.a:cmd
   if !empty(a:000)
     let cmd .= ' '.join(a:000)
   endif
@@ -135,3 +135,4 @@ function! flutter#run(...) abort
   endif
 
 endfunction
+
